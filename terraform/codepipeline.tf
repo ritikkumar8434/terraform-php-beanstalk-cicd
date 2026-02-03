@@ -19,7 +19,7 @@ resource "aws_codepipeline" "pipeline" {
       output_artifacts = ["source_output"]
 
       configuration = {
-        Owner      = var.github_owner
+	Owner      = var.github_owner
         Repo       = var.github_repo
         Branch     = "main"
         OAuthToken = var.github_oauth_token
@@ -27,23 +27,6 @@ resource "aws_codepipeline" "pipeline" {
     }
   }
 
-  stage {
-    name = "Build"
-
-    action {
-      name             = "Build"
-      category         = "Build"
-      owner            = "AWS"
-      provider         = "CodeBuild"
-      version          = "1"
-      input_artifacts  = ["source_output"]
-      output_artifacts = ["build_output"]
-
-      configuration = {
-        ProjectName = aws_codebuild_project.build.name
-      }
-    }
-  }
 
   stage {
     name = "Deploy"
@@ -54,12 +37,12 @@ resource "aws_codepipeline" "pipeline" {
       owner           = "AWS"
       provider        = "ElasticBeanstalk"
       version         = "1"
-      input_artifacts = ["build_output"]
+      input_artifacts = ["source_output"]
 
       configuration = {
         ApplicationName = aws_elastic_beanstalk_application.app.name
         EnvironmentName = aws_elastic_beanstalk_environment.env.name
-      }
+     }
     }
   }
 }

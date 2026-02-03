@@ -1,0 +1,13 @@
+version: 0.2
+
+phases:
+  build:
+    commands:
+      - echo "Packaging PHP application..."
+      - cd app
+      - zip -r ../app.zip .
+
+artifacts:
+  files:
+    - app.zip
+  discard-paths: yes

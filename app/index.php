@@ -58,7 +58,7 @@ date_default_timezone_set('UTC');
 <body>
 <div class="container">
     <h1>🚀 PHP Sample Application</h1>
-    <p>Welcome to the PHP application deployed on <strong>AWS Elastic Beanstalk</strong>!</p>
+    <p>Welcome to the PHP application deployed on <strong>AWS Elastic Beanstalk and the changes done from cicd....</strong>!</p>
 
     <div class="info-box">
         <h2>Application Information</h2>
