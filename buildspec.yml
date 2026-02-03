@@ -1,12 +1,19 @@
 version: 0.2
 
 phases:
+  install:
+    commands:
+      - echo "Nothing to install for PHP"
+
   build:
     commands:
-      - echo "Packaging PHP application..."
-      - cd app
-      - zip -r ../app.zip .
+      - echo "Preparing artifact for CodePipeline"
+      # Make a folder for artifact
+      - mkdir -p artifact
+      # Copy only index.php from app folder
+      - cp app/index.php artifact/
 
 artifacts:
   files:
-    - app.zip
+    - artifact/**   # CodeBuild picks everything inside artifact/
+  discard-paths: yes  # Ensures files are at root in the pipeline artifact
